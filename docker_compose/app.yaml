@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  app:
+    container_name: sreach_model
+    build: ..
+    command: uvicorn --factory src.app:create_app --reload --host 127.0.0.1 --port 8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - ..:/code 
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
