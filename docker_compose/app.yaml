@@ -4,7 +4,7 @@ services:
   app:
     container_name: sreach_model
     build: ..
-    command: uvicorn --factory src.app:create_app --reload --host 127.0.0.1 --port 8000
+    command: poetry run gunicorn -w 4 -k uvicorn.workers.UvicornWorker src.app:app --bind 127.0.0.1:8000
     ports:
       - "8000:8000"
     volumes:
